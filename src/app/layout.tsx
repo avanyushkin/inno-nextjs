@@ -1,8 +1,10 @@
 import Header from "@/components/UI/header";
-import Providers from "@/components/Providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { HeroUIProvider } from "@heroui/system";
+import { CLIENT_PUBLIC_FILES_PATH } from "next/dist/shared/lib/constants";
+import { Providers } from "@/providers/provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
