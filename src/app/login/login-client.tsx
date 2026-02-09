@@ -6,15 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
 import { Link } from "@heroui/react";
-
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-}
+import { User } from "@/types/user";
 
 export default function LoginClient() {
   const router = useRouter();
