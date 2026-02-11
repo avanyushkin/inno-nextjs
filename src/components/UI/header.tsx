@@ -1,20 +1,25 @@
 "use client";
 
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@heroui/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import CartIcon from "@/components/CartIcon";
+import { useAuth } from "@/contexts/AuthContext";
+import { User, LogOut } from "lucide-react";
 
 export default function Header() {
-  const pathname = usePathname ();
+  const pathname = usePathname();
+  const { user, logout } = useAuth();
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/cart", label: "Cart"},
-    { href: "/favorite", label: "Favorite"}
+    { href: "/cart", label: "Cart"}
   ];
   return (
     <Navbar>
       <NavbarBrand>
-        <p className="font-bold text-inherit">SHOP</p>
+        <Link href="/">
+          <p className="font-bold text-inherit">SHOP</p>
+        </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {navItems.map ((item) => {
@@ -36,14 +41,45 @@ export default function Header() {
         })}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="/login">Login</Link>
-        </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="/register" variant="flat">
-            Sign Up
-          </Button>
+          <CartIcon />
         </NavbarItem>
+        {user ? (
+          <>
+            <NavbarItem className="hidden lg:flex">
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button variant="light" startContent={<User className="h-4 w-4" />}>
+                    {user.firstName || user.username}
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="Profile Actions">
+                  <DropdownItem key="profile" className="h-14 gap-2">
+                    <p className="font-semibold">Signed in as</p>
+                    <p className="font-semibold">{user.email}</p>
+                  </DropdownItem>
+                  <DropdownItem key="logout" color="danger" className="text-danger" onClick={logout}>
+                    <div className="flex items-center gap-2">
+                      <LogOut className="h-4 w-4" />
+                      Log Out
+                    </div>
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </NavbarItem>
+          </>
+        ) : (
+          <>
+            <NavbarItem className="hidden lg:flex">
+              <Link href="/login">Login</Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Button as={Link} color="primary" href="/register" variant="flat">
+                Sign Up
+              </Button>
+            </NavbarItem>
+          </>
+        )}
       </NavbarContent>
     </Navbar>
   );
