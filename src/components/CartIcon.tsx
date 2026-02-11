@@ -10,14 +10,9 @@ export default function CartIcon() {
 
   return (
     <Link href="/cart">
-      <Button 
-        color="primary" 
-        variant="flat" 
-        size="sm"
-        className="relative"
+      <Button color="primary" variant="ghost" size="sm" className="relative"
         startContent={<ShoppingCart className="h-5 w-5" />}
       >
-        Cart
         {cart.totalItems > 0 && (
           <Badge 
             color="danger" 

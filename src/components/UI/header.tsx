@@ -9,12 +9,14 @@ export default function Header() {
   const pathname = usePathname ();
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/favorite", label: "Favorite"}
+    { href: "/cart", label: "Cart"}
   ];
   return (
     <Navbar>
       <NavbarBrand>
-        <p className="font-bold text-inherit">SHOP</p>
+        <Link href="/">
+          <p className="font-bold text-inherit">SHOP</p>
+        </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {navItems.map ((item) => {
