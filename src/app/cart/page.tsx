@@ -4,8 +4,17 @@ import { useCart } from "@/contexts/CartContext";
 import { Button, Card, CardBody, CardHeader, Image, Input } from "@heroui/react";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function CartPage() {
+  return (
+    <ProtectedRoute>
+      <CartPageContent />
+    </ProtectedRoute>
+  );
+}
+
+function CartPageContent() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
 
   if (cart.items.length === 0) {

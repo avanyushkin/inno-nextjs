@@ -7,9 +7,11 @@ import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
 import { Link } from "@heroui/react";
 import { User } from "@/types/user";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function LoginClient() {
   const router = useRouter();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -76,13 +78,13 @@ export default function LoginClient() {
     try {
       const user = await authenticateUser(formData.username, formData.password);
       if (user) {
-        localStorage.setItem('user', JSON.stringify({
+        login({
           id: user.id,
           username: user.username,
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
-        }));
+        });
         setTimeout(() => {
           router.push("/");
         }, 1000);
