@@ -1,5 +1,7 @@
 import { Card, CardBody, CardHeader, Image, Button } from "@heroui/react";
 import { Product } from "@/types/product";
+import { useCart } from "@/contexts/CartContext";
+import { ShoppingCart } from "lucide-react";
 
 interface ProductCardProps {
   product: Product;
@@ -7,6 +9,18 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const discountedPrice = product.price * (1 - product.discountPercentage / 100);
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      discountPercentage: product.discountPercentage,
+      thumbnail: product.thumbnail,
+      stock: product.stock,
+    });
+  };
 
   return (
     <Card className="py-4 max-w-[300px]">
@@ -42,7 +56,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
         <div className="flex items-center justify-between mt-2">
           <span className="text-small text-default-500">Stock: {product.stock}</span>
-          <Button color="primary" size="sm">
+          <Button 
+            color="primary" 
+            size="sm"
+            onClick={handleAddToCart}
+            startContent={<ShoppingCart className="h-4 w-4" />}
+          >
             Add to Cart
           </Button>
         </div>

@@ -3,12 +3,12 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@heroui/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import CartIcon from "@/components/CartIcon";
 
 export default function Header() {
   const pathname = usePathname ();
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/cart", label: "Cart"},
     { href: "/favorite", label: "Favorite"}
   ];
   return (
@@ -36,6 +36,9 @@ export default function Header() {
         })}
       </NavbarContent>
       <NavbarContent justify="end">
+        <NavbarItem>
+          <CartIcon />
+        </NavbarItem>
         <NavbarItem className="hidden lg:flex">
           <Link href="/login">Login</Link>
         </NavbarItem>
