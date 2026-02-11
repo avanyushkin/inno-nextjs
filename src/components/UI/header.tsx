@@ -4,12 +4,12 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Dropdown,
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import CartIcon from "@/components/CartIcon";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuthStore } from "@/stores/authStore";
 import { User, LogOut } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuthStore();
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/cart", label: "Cart"}

@@ -7,11 +7,11 @@ import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
 import { Link } from "@heroui/react";
 import { User } from "@/types/user";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuthStore } from "@/stores/authStore";
 
 export default function LoginClient() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login } = useAuthStore();
   const [formData, setFormData] = useState({
     username: "",
     password: "",

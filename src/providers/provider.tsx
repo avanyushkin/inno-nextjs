@@ -1,14 +1,23 @@
 "use client";
 import { HeroUIProvider } from "@heroui/system";
-import { CartProvider } from "@/contexts/CartContext";
-import { AuthProvider } from "@/contexts/AuthContext";
+import { useEffect } from "react";
+import { useAuthStore } from "@/stores/authStore";
+
+function AuthInitializer() {
+  const setLoading = useAuthStore((state) => state.setLoading);
+  
+  useEffect(() => {
+    setLoading(false);
+  }, [setLoading]);
+
+  return null;
+}
 
 export function Providers ({ children }: {children: React.ReactNode}) {
   return (
     <HeroUIProvider>
-      <AuthProvider>
-        <CartProvider>{children}</CartProvider>
-      </AuthProvider>
+      <AuthInitializer />
+      {children}
     </HeroUIProvider>
   );
 }
