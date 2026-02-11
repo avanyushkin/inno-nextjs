@@ -1,6 +1,6 @@
 "use client";
 
-import { useCart } from "@/contexts/CartContext";
+import { useCartStore } from "@/stores/cartStore";
 import { Button, Card, CardBody, CardHeader, Image, Input } from "@heroui/react";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import Link from "next/link";
@@ -15,9 +15,9 @@ export default function CartPage() {
 }
 
 function CartPageContent() {
-  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
+  const { items, totalItems, totalPrice, removeFromCart, updateQuantity, clearCart } = useCartStore();
 
-  if (cart.items.length === 0) {
+  if (items.length === 0) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="text-center py-16">
@@ -36,7 +36,7 @@ function CartPageContent() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Shopping Cart ({cart.totalItems} items)</h1>
+        <h1 className="text-3xl font-bold">Shopping Cart ({totalItems} items)</h1>
         <Button 
           color="danger" 
           variant="flat" 
@@ -49,7 +49,7 @@ function CartPageContent() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-4">
-          {cart.items.map((item) => {
+          {items.map((item) => {
             const discountedPrice = item.price * (1 - item.discountPercentage / 100);
             return (
               <Card key={item.id} className="p-4">
@@ -130,8 +130,8 @@ function CartPageContent() {
             </CardHeader>
             <CardBody className="space-y-4">
               <div className="flex justify-between">
-                <span>Subtotal ({cart.totalItems} items)</span>
-                <span>${cart.totalPrice.toFixed(2)}</span>
+                <span>Subtotal ({totalItems} items)</span>
+                <span>${totalPrice.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
@@ -139,12 +139,12 @@ function CartPageContent() {
               </div>
               <div className="flex justify-between">
                 <span>Tax</span>
-                <span>${(cart.totalPrice * 0.08).toFixed(2)}</span>
+                <span>${(totalPrice * 0.08).toFixed(2)}</span>
               </div>
               <div className="border-t pt-4">
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total</span>
-                  <span>${(cart.totalPrice * 1.08).toFixed(2)}</span>
+                  <span>${(totalPrice * 1.08).toFixed(2)}</span>
                 </div>
               </div>
               <Button color="primary" size="lg" className="w-full">

@@ -1,6 +1,6 @@
 import { Card, CardBody, CardHeader, Image, Button } from "@heroui/react";
 import { Product } from "@/types/product";
-import { useCart } from "@/contexts/CartContext";
+import { useCartStore } from "@/stores/cartStore";
 import { ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -8,7 +8,7 @@ interface ProductCardProps {
   product: Product;
 }
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addToCart } = useCart();
+  const { addToCart } = useCartStore();
   const router = useRouter();
 
   const handleAddToCart = () => {
