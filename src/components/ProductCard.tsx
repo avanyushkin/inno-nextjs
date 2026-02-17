@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardBody, CardHeader, Image, Button } from "@heroui/react";
 import { Product } from "@/types/product";
 import { useCartStore } from "@/stores/cartStore";

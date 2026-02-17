@@ -1,47 +1,26 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import { Product } from "@/types/product";
 
-export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export const dynamic = 'force-static';
+export const updateTime = 1800; // every 30 min upd
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("https://dummyjson.com/products");
-        if (!response.ok) {
-          throw new Error("fail on fetching");
-        }
-        const data = await response.json();
-        setProducts(data.products);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "error");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="text-center pt-12">
-        <div className="text-2xl font-bold mb-4">Loading products...</div>
-      </div>
-    );
+async function getProducts(): Promise<Product[]> {
+  try {
+    const response = await fetch("https://dummyjson.com/products");
+    if (!response.ok) {
+      throw new Error("fail on fetching");
+    }
+    const data = await response.json();
+    return data.products;
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    return [];
   }
-  if (error) {
-    return (
-      <div className="text-center pt-12">
-        <div className="text-2xl font-bold mb-4 text-red-500">Error: {error}</div>
-      </div>
-    );
-  }
+}
+
+export default async function Home() {
+  const products = await getProducts();
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-center mb-8">Our Products</h1>
