@@ -41,14 +41,13 @@ export default function RegisterPage () {
       newErrors.confirmPassword = "Passwords do not match";
     }
     setErrors(newErrors);
-    return !Object.values(newErrors).some(error => error !== "");
+    return !Object.values (newErrors).some (error => error !== "");
   };
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (validateForm()) {
-      setTimeout(() => {
-        router.push("/");
+    e.preventDefault ();
+    if (validateForm ()) {
+      setTimeout (() => {
+        router.push ("/");
       }, 1000);
     }
   };
