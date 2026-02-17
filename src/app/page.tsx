@@ -14,7 +14,7 @@ export default function Home() {
       try {
         const response = await fetch("https://dummyjson.com/products");
         if (!response.ok) {
-          throw new Error("fali on fetching");
+          throw new Error("fail on fetching");
         }
         const data = await response.json();
         setProducts(data.products);

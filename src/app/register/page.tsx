@@ -7,21 +7,13 @@ import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
 import { Link } from "@heroui/react";
 
-export default function RegisterPage() {
-  const router = useRouter();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    password: "",
-    confirmPassword: "",
+export default function RegisterPage () {
+  const router = useRouter ();
+  const makeInitState = () => ({
+    firstName: "", lastName: "", email: "", password: "", confirmPassword: "", 
   });
-
-  const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [formData, setFormData] = useState ( makeInitState () );
+  const [errors, setErrors] = useState ( makeInitState () );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -31,13 +23,7 @@ export default function RegisterPage() {
     }
   };
   const validateForm = () => {
-    const newErrors = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    };
+    const newErrors = makeInitState ();
     if (!formData.firstName.trim()) {
       newErrors.firstName = "First name is required";
     }
@@ -55,14 +41,13 @@ export default function RegisterPage() {
       newErrors.confirmPassword = "Passwords do not match";
     }
     setErrors(newErrors);
-    return !Object.values(newErrors).some(error => error !== "");
+    return !Object.values (newErrors).some (error => error !== "");
   };
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (validateForm()) {
-      setTimeout(() => {
-        router.push("/");
+    e.preventDefault ();
+    if (validateForm ()) {
+      setTimeout (() => {
+        router.push ("/");
       }, 1000);
     }
   };
