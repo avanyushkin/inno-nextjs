@@ -60,7 +60,6 @@ export default function LoginClient() {
           <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
           <p className="text-gray-600">Sign in to your account</p>
         </div>
-
         <form onSubmit={handleSubmit} className="space-y-6">
           {['username', 'password'].map(field => (
             <Input
@@ -76,20 +75,11 @@ export default function LoginClient() {
               errorMessage={errors[field as keyof FormState]}
             />
           ))}
-
-          {errors.general && (
-            <div className="text-danger text-sm text-center">{errors.general}</div>
-          )}
-
-          <Button type="submit" color="primary" size="lg" fullWidth isLoading={loading}>
-            Sign In
-          </Button>
+          {errors.general && ( <div className="text-danger text-sm text-center">{errors.general}</div> )}
+          <Button type="submit" color="primary" size="lg" fullWidth isLoading={loading}>Sign In</Button>
         </form>
-
         <div className="mt-8 text-center">
-          <Link href="/register" className="text-primary hover:underline">
-            Don't have an account? Sign up
-          </Link>
+          <Link href="/register" className="text-primary hover:underline">Don't have an account? Sign up</Link>
         </div>
       </Card>
     </div>
