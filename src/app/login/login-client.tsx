@@ -12,17 +12,10 @@ import { useAuthStore } from "@/stores/authStore";
 export default function LoginClient() {
   const router = useRouter();
   const { login } = useAuthStore();
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-  const [errors, setErrors] = useState({
-    username: "",
-    password: "",
-    general: "",
-  });
-
-  const [isLoading, setIsLoading] = useState(false);
+  const makeInitState = () => ( { username: "", password: "", general: "" } );
+  const [formData, setFormData] = useState ( makeInitState () );
+  const [errors, setErrors] = useState( makeInitState () );
+  const [isLoading, setIsLoading] = useState (false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -34,11 +27,7 @@ export default function LoginClient() {
     }
   };
   const validateForm = () => {
-    const newErrors = {
-      username: "",
-      password: "",
-      general: "",
-    };
+    const newErrors = makeInitState ();
     if (!formData.username.trim()) {
       newErrors.username = "Username or email is required";
     }
