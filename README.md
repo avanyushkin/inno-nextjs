@@ -2,7 +2,7 @@
 
 A modern web application built with Next.js, Zustand for state management, and HeroUI components. This project simulates a real online store using the DummyJSON API for products and user authentication.
 
-## 🔑 Demo Credentials
+## Demo Credentials
 username: emilys
 password: emilyspass
 
@@ -23,3 +23,10 @@ npm install
 npm run dev
 ```
 
+## Server-side rendering 
+Home Products Page: Implemented using SSR (Server-Side Rendering) strategy for optimal SEO and faster initial page load
+
+## Next.js and Vite Comparison
+There are 2 main differencies between NextJS and Vite.
+- First one is that NextJS has many rendering stratagies (SSR, SSG, ISR, CSR), when Vite has only CSR
+- Second one is that NextJS has built-in routing, when Vite uses React Router
