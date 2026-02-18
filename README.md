@@ -23,8 +23,8 @@ npm install
 npm run dev
 ```
 
-## Server-side rendering 
-Home Products Page: Implemented using SSR (Server-Side Rendering) strategy for optimal SEO and faster initial page load
+## Static Site Generation (SSG)
+Static Site Generation for Home Products Page
 
 ## Next.js and Vite Comparison
 There are 2 main differencies between NextJS and Vite.
